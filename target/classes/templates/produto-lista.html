@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listagem de Produtos</title>
+
+	<!-- Bootstrap CSS -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Bootstrap JS -->
+		<script src="/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Container principal -->
+    <div class="container mt-4">
+
+        <!-- Título da página -->
+        <h1>Listagem de Produtos</h1>
+
+        <!-- Botão de inclusão -->
+        <p>
+            <a th:href="@{/produto/form-incluir}" class="btn btn-primary">Novo Produto</a>
+        </p>
+
+        <!-- Tabela de produtos -->
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Preço de Venda</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="produto, stat : ${produtos}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${produto.nome}"></td>
+                    <td th:text="${produto.quantidade}"></td>
+                    <td th:text="${produto.precoVenda}"></td>
+                    <td>
+                        <!-- Botão de alteração -->
+                        <a th:href="@{/produto/form-alterar/{id}(id=${produto.id})}" class="btn btn-primary btn-sm me-2">Alterar</a>
+
+                        <!-- Botão de exclusão -->
+                        <a th:href="@{/produto/excluir/{id}(id=${produto.id})}"
+                           onclick="return confirm('Tem certeza que deseja excluir este produto?')"
+                           class="btn btn-danger btn-sm">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

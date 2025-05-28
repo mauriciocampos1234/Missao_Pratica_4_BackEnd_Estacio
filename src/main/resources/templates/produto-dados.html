@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto</title>
+
+	<!-- Bootstrap CSS -->
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Bootstrap JS -->
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+    <!-- Container principal -->
+    <div class="container mt-4">
+
+        <!-- Título da página -->
+        <h1>Dados do Produto</h1>
+
+        <!-- Formulário para incluir ou alterar produto -->
+        <form th:action="@{/produto/salvar}" method="post" class="form">
+            <!-- Campo oculto para armazenar a ação (incluir ou alterar) -->
+            <input type="hidden" name="acao" th:value="${acao}" />
+            <input type="hidden" name="id" th:if="${produto.id != null}" th:value="${produto.id}" />
+
+            <!-- Nome do Produto -->
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" id="nome" name="nome" th:value="${produto.nome}" class="form-control" required />
+            </div>
+
+            <!-- Quantidade do Produto -->
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade:</label>
+                <input type="number" id="quantidade" name="quantidade" th:value="${produto.quantidade}" class="form-control" required />
+            </div>
+
+            <!-- Preço de Venda do Produto -->
+            <div class="mb-3">
+                <label for="precoVenda" class="form-label">Preço de Venda:</label>
+                <input type="number" step="0.01" id="precoVenda" name="precoVenda" th:value="${produto.precoVenda}" class="form-control" required />
+            </div>
+
+            <!-- Botão de Envio -->
+            <button type="submit" th:text="${acao == 'incluir' ? 'Adicionar Produto' : 'Salvar Alterações'}" class="btn btn-primary"></button>
+        </form>
+    </div>
+</body>
+</html>
